@@ -20,7 +20,7 @@ public class DBconnector {
         }
     }
 
-    public static ArrayList<Languages> gerLanguages() {
+    public static ArrayList<Languages> getLanguages() {
         ArrayList<Languages> languages = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement("SELECT id, name, code FROM languages");
@@ -38,7 +38,7 @@ public class DBconnector {
         return languages;
     }
 
-    public static ArrayList<News> gerNews() {
+    public static ArrayList<News> getNews() {
         ArrayList<News> arr = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement("" +
@@ -46,8 +46,8 @@ public class DBconnector {
                     "it.language_id, it.publication_id, pub.id, pub.name, pub.description, pub.rating, " +
                     "lan.id, lan.name, lan.code " +
                     "FROM news it " +
-                    "INNER JOIN languages lan it.language_id=lan.id " +
-                    "INNER JOIN publications pub it.publication_id = pub.id");
+                    "INNER JOIN languages lan ON it.language_id = lan.id " +
+                    "INNER JOIN publications pub ON it.publication_id = pub.id");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 Long id = rs.getLong("id");

@@ -16,14 +16,14 @@ import java.util.ArrayList;
     public class getServl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<Languages> arr = DBconnector.gerLanguages();
-        request.setAttribute("lang", arr);
+        ArrayList<News> arr = DBconnector.getNews();
+        ArrayList<Languages> a = DBconnector.getLanguages();
+        request.setAttribute("novosti", arr);
+        request.setAttribute("lang", a);
         request.getRequestDispatcher("/main.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ArrayList<News> arr = DBconnector.gerNews();
-        request.setAttribute("novosti", arr);
-        request.getRequestDispatcher("/main.jsp").forward(request, response);
+
     }
 }

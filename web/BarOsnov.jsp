@@ -1,5 +1,6 @@
 <%@ page import="model.Languages" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="model.Publications" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <nav class="navbar bg-light text-center mw-100">
     <div class="container-fluid ">
@@ -25,10 +26,19 @@
         </form>
     </div>
 </nav>
-<form class="bg-dark">
+<div class="bg-dark">
     <ul class="list-group list-group-horizontal w-100 text-center ">
+        <%
+
+            ArrayList<Publications> publ = (ArrayList<Publications>) request.getAttribute("publ");
+            if (publ != null){
+                for (Publications p : publ){
+        %>
         <li class="nav-item mx-auto">
-            <b><a class="nav-link text-light mx-2" href="#">RUS</a></b>
+            <b><a href="#" class="nav-link text-light mx-2"><%=p.getName()%></a></b>
         </li>
+        <%
+                }
+            }%>
     </ul>
-</form>
+</div>

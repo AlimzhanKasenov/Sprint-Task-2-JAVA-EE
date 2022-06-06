@@ -73,4 +73,23 @@ public class DBconnector {
         }
         return arr;
     }
+
+    public static ArrayList<Publications> getPublications() {
+        ArrayList<Publications> publ = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement("SELECT id, name, description, rating FROM publications");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Long id = rs.getLong("id");
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                double rating = rs.getDouble("rating");
+                publ.add(new Publications(id, name, description, rating));
+            }
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return publ;
+    }
 }

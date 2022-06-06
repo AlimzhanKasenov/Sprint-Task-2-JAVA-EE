@@ -3,6 +3,7 @@ package servle;
 import DB.DBconnector;
 import model.Languages;
 import model.News;
+import model.Publications;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,9 @@ import java.util.ArrayList;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<News> arr = DBconnector.getNews();
+        ArrayList<Publications> publ = DBconnector.getPublications();
         ArrayList<Languages> a = DBconnector.getLanguages();
+        request.setAttribute("publ", publ);
         request.setAttribute("novosti", arr);
         request.setAttribute("lang", a);
         request.getRequestDispatcher("/main.jsp").forward(request, response);

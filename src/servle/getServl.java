@@ -18,9 +18,9 @@ import java.util.ArrayList;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<News> arr = DBconnector.getNews();
-        ArrayList<Publications> publ = DBconnector.getPublications();
+        ArrayList<Publications> pub = DBconnector.getPublications();
         ArrayList<Languages> a = DBconnector.getLanguages();
-        request.setAttribute("publ", publ);
+        request.setAttribute("publ", pub);
         request.setAttribute("lang", a);
         request.setAttribute("novosti", arr);
         request.getRequestDispatcher("/main.jsp").forward(request, response);

@@ -10,11 +10,9 @@
                     if (arr != null){
                         for (Languages i : arr){
                 %>
-                <form action="getLangServ" method="post">
                 <li class="nav-item">
                     <a class="nav-link mx-2" href="getLangServ?lang_id=<%=i.getId()%>"><%=i.getCode()%></a>
                 </li>
-                </form>
                 <%
                 }
                     }%>

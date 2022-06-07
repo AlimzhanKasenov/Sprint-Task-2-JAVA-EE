@@ -133,4 +133,42 @@ public class DBconnector {
         }
         return arr;
     }
+
+    public static ArrayList<News> getOneNov(Long id_news) {
+        ArrayList<News> arr = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement("" +
+                    "SELECT it.id, it.title, it.short_content, it.content, it.post_date, it.picture_url, " +
+                    "it.language_id, it.publication_id, pub.id, pub.name, pub.description, pub.rating, " +
+                    "lan.id, lan.name, lan.code " +
+                    "FROM news it " +
+                    "INNER JOIN languages lan ON it.language_id = lan.id " +
+                    "INNER JOIN publications pub ON it.publication_id = pub.id");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Long id = rs.getLong("id");
+                String title = rs.getString("title");
+                String short_content = rs.getString("short_content");
+                String content = rs.getString("content");
+                Timestamp post_date = rs.getTimestamp("post_date");
+                String picture_url = rs.getString("picture_url");
+                Languages lan = new Languages(
+                        rs.getLong("id"),
+                        rs.getString("name"),
+                        rs.getString("code"));
+                Publications pub = new Publications(
+                        rs.getLong("id"),
+                        rs.getString("name"),
+                        rs.getString("description"),
+                        rs.getDouble("rating"));
+                if (id == id_news) {
+                    arr.add(new News(id, title, short_content, content, post_date, picture_url, lan, pub));
+                }
+            }
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return arr;
+    }
 }

@@ -22,7 +22,7 @@
                         <h3 class=""><%=i.getTitle()%></h3>
                         <i class="text-muted"><%=i.getPost_date()%></i>
                         <p class="card-text"><%=i.getShort_content()%></p>
-                        <b><a class="nav-link text-primary mx-2" href="#">Подробне</a></b>
+                        <b><a class="nav-link text-primary mx-2" href="podrNovos?nov_id=<%=i.getId()%>">Подробне</a></b>
                     </div>
                 </div>
                 <%

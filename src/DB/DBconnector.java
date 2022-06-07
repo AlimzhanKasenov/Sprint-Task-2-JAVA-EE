@@ -92,4 +92,45 @@ public class DBconnector {
         }
         return publ;
     }
+
+    public static ArrayList<News> getSortNow(Long lan){
+        ArrayList<News> arr = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement("" +
+                    "SELECT * FROM news " +
+                    "WHERE language_id = ? " +
+                    "ORDER BY post_date DESC");
+
+            st.setLong(1, lan);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+
+                News n = new News();
+                n.setId(rs.getLong("id"));
+                n.setTitle(rs.getString("title"));
+                n.setShort_content(rs.getString("short_content"));
+                n.setContent(rs.getString("content"));
+                n.setPost_date(rs.getTimestamp("post_date"));
+                n.setPicture_url(rs.getString("picture_url"));
+
+                Languages langua = new Languages();
+                langua.setId(rs.getLong("language_id"));
+
+                Publications pub = new Publications();
+                pub.setId(rs.getLong("publication_id"));
+
+                n.setLanguage_id(langua);
+                n.setPublication_id(pub);
+
+                if (langua.getId() == lan) {
+                    arr.add(n);
+                }
+            }
+            st.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return arr;
+    }
 }

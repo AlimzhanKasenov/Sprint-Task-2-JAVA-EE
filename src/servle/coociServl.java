@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class coociServl extends HttpServlet {
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        String coocieValue = request.getParameter("coocie");
-       response
+
 
     }
 }

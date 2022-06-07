@@ -10,9 +10,9 @@
                     if (arr != null){
                         for (Languages i : arr){
                 %>
-                <form action="coociServl" method="post">
+                <form action="getLangServ" method="post">
                 <li class="nav-item">
-                    <a name="coocie" class="nav-link mx-2" href="#"><%=i.getCode()%></a>
+                    <a class="nav-link mx-2" href="getLangServ?lang_id=<%=i.getId()%>"><%=i.getCode()%></a>
                 </li>
                 </form>
                 <%
@@ -20,7 +20,7 @@
                     }%>
             </ul>
                 <div class="w-50">
-            <h3><b class="ml-5">WORLD NEWS PORTAL</b></h3>
+            <h3><b class="ml-5"> <a href="/" class="nav-item text-decoration-none text-reset"> WORLD NEWS PORTAL </a></b></h3>
         </div>
         <form class="d-flex w-25">
             <input class="form-control me-2 " type="search" placeholder="Поиск" aria-label="Поиск">
@@ -37,7 +37,7 @@
                 for (Publications p : publ){
         %>
         <li class="nav-item mx-auto">
-            <b><a href="#" class="nav-link text-light mx-2"><%=p.getName()%></a></b>
+            <b class="nav-link text-light mx-2"><%=p.getName()%></b>
         </li>
         <%
                 }

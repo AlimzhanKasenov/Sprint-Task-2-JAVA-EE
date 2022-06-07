@@ -10,9 +10,11 @@
                     if (arr != null){
                         for (Languages i : arr){
                 %>
+                <form action="coociServl" method="post">
                 <li class="nav-item">
-                    <a class="nav-link mx-2" href="#"><%=i.getCode()%></a>
+                    <a name="coocie" class="nav-link mx-2" href="#"><%=i.getCode()%></a>
                 </li>
+                </form>
                 <%
                 }
                     }%>

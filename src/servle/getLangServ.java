@@ -24,8 +24,8 @@ public class getLangServ extends HttpServlet {
         ArrayList<Languages> a = DBconnector.getLanguages();
         request.setAttribute("publ", publ);
         request.setAttribute("lang", a);
-        request.setAttribute("novosti", news);
-        request.getRequestDispatcher("/main.jsp").forward(request, response);
+        request.setAttribute("newsSort", news);
+        request.getRequestDispatcher("/sortNews.jsp").forward(request, response);
 
 
     }

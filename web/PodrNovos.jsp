@@ -16,11 +16,10 @@
     <div class="col-8 ">
         <div class="card px-0">
             <h3 class=""><%=i.getTitle()%></h3>
-            <i class="text-muted"><%=i.getPost_date()%></i>
-            <p class="card-text"><%=i.getShort_content() + " " + i.getPublication_id().getName()%></p>
+            <i class="text-muted mb-3"><%=i.getPost_date() + " " + i.getPublication_id().getName()%></i>
             <img src="<%=i.getPicture_url()%>" class="card-img-top">
             <div class="card-body">
-                <b class="text-primary"><%=i.getShort_content()%></b>
+                <b class=""><%=i.getShort_content()%></b>
                 <p class="card-text"><%=i.getContent()%></p>
             </div>
         </div>
@@ -31,12 +30,24 @@
             <p class="mx-3"><%=i.getPublication_id().getDescription()%></p>
             <i><H4 class="mx-3">Rating : <%=i.getPublication_id().getRating()%></H4></i>
         </div>
+        <div class="my-5 mx-3">
+            <h4><b>Arhives</b></h4>
+            <p><a href="#">Май 2022</a> </p>
+            <p><a href="#">Апрель 2022</a> </p>
+            <p><a href="#">Март 2022</a> </p>
+        </div>
+        <div class="my-5 mx-3">
+            <h4><b>Follow us</b></h4>
+            <p><a href="#">Instagram</a> </p>
+            <p><a href="#">Twitter</a> </p>
+            <p><a href="#">Facebook</a> </p>
+        </div>
     </div>
     <%
             }
         }
     %>
 </div>
-
+<footer class="text-muted text-center mt-3 mb-3">Copyright (C) All Rights Reserved</footer>
 </body>
 </html>

@@ -7,6 +7,7 @@ import model.Publications;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,12 +22,12 @@ public class getLangServ extends HttpServlet {
 
         ArrayList<News> news = DBconnector.getSortNow(l);
         ArrayList<Publications> publ = DBconnector.getPublications();
+        String pu = DBconnector.getOnePublications(l);
         ArrayList<Languages> a = DBconnector.getLanguages();
         request.setAttribute("publ", publ);
         request.setAttribute("lang", a);
         request.setAttribute("newsSort", news);
+        request.setAttribute("newsSort_2", pu);
         request.getRequestDispatcher("/sortNews.jsp").forward(request, response);
-
-
     }
 }

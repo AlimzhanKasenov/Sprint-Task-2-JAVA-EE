@@ -7,7 +7,7 @@
 </head>
 <body>
     <%@include file="BarOsnov.jsp"%>
-    <div class="gx-3">
+    <div class="gx-3 mt-3">
     <div class="container row mx-auto gy-3">
                 <%
                     ArrayList<News> a = (ArrayList<News>) request.getAttribute("novosti");
@@ -31,5 +31,6 @@
                 %>
     </div>
     </div>
+    <footer class="text-muted text-center mt-3 mb-3">Copyright (C) All Rights Reserved</footer>
 </body>
 </html>

@@ -1,10 +1,5 @@
 package servle;
 
-import DB.DBconnector;
-import model.Languages;
-import model.News;
-import model.Publications;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -12,22 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet ("/getLangServ")
 public class getLangServ extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String lan = request.getParameter("lang_id");
-        Long l = Long.parseLong(lan);
-
-        ArrayList<News> news = DBconnector.getSortNow(l);
-        ArrayList<Publications> publ = DBconnector.getPublications();
-        String pu = DBconnector.getOnePublications(l);
-        ArrayList<Languages> a = DBconnector.getLanguages();
-        request.setAttribute("publ", publ);
-        request.setAttribute("lang", a);
-        request.setAttribute("newsSort", news);
-        request.setAttribute("newsSort_2", pu);
-        request.getRequestDispatcher("/sortNews.jsp").forward(request, response);
+        Cookie cookie = new Cookie("lang",lan);
+        cookie.setMaxAge(3600*24*31);
+        response.addCookie(cookie);
+        response.sendRedirect("/");
     }
 }

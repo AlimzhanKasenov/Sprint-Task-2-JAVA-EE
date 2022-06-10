@@ -12,7 +12,7 @@
                 %>
 
                 <li class="nav-item">
-                    <a class="nav-link mx-2" href="getLangServ?lang_id=<%=i.getId()%>"><%=i.getCode()%></a>
+                    <a class="nav-link mx-2" href="/getLangServ?lang_id=<%=i.getId()%>"><%=i.getCode()%></a>
                 </li>
                 <%
                 }

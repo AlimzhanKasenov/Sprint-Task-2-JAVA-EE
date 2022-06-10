@@ -21,7 +21,7 @@
                 <div class="w-50">
             <h3><b class="ml-5"> <a href="/" class="nav-item text-decoration-none text-reset"> WORLD NEWS PORTAL </a></b></h3>
         </div>
-        <form class="d-flex w-25">
+        <form action="LoginPassworedWhod.jsp" class="d-flex w-25">
             <input class="form-control me-2 " type="search" placeholder="Поиск" aria-label="Поиск">
             <button class="btn btn-outline-success text-nowrap align-top" type="submit">Sign up</button>
         </form>

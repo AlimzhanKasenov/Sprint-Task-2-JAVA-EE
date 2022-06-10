@@ -3,6 +3,7 @@ package DB;
 import model.Languages;
 import model.News;
 import model.Publications;
+import model.Users;
 import org.w3c.dom.ls.LSOutput;
 
 import java.sql.*;
@@ -231,5 +232,23 @@ public class DBconnector {
             e.printStackTrace();
         }
         return arr;
+    }
+
+    public static ArrayList<Users> authorization() {
+        ArrayList<Users> user = new ArrayList<>();
+        try {
+            PreparedStatement st = connection.prepareStatement("SELECT id, login, password, name FROM users");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Long id = rs.getLong("id");
+                String login = rs.getString("login");
+                String password = rs.getString("password");
+                String fullName = rs.getString("name");
+                user.add(new Users(id, login, password, fullName));
+            }
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }return user;
     }
 }

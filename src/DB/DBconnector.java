@@ -4,7 +4,6 @@ import model.Languages;
 import model.News;
 import model.Publications;
 import model.Users;
-import org.w3c.dom.ls.LSOutput;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -143,7 +142,7 @@ public class DBconnector {
                 Long id = rs.getLong("id");
                 String name = rs.getString("name");
 
-                if (s == id){
+                if (s == id) {
                     publ = name;
                 }
             }
@@ -154,7 +153,7 @@ public class DBconnector {
         return publ;
     }
 
-    public static ArrayList<News> getSortNow(Long lan){
+    public static ArrayList<News> getSortNow(Long lan) {
         ArrayList<News> arr = new ArrayList<>();
         try {
             PreparedStatement st = connection.prepareStatement("" +
@@ -190,7 +189,7 @@ public class DBconnector {
                 }
             }
             st.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return arr;
@@ -249,6 +248,41 @@ public class DBconnector {
             st.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }return user;
+        }
+        return user;
+    }
+
+    public static boolean addUser(String login, String password, String name) {
+        int rows = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("" +
+                    "INSERT INTO users (id, login, password, name) " +
+                    "values (null, ?, ?, ?)");
+
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            preparedStatement.setString(3, name);
+            rows = preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rows > 0;
+    }
+
+    public static boolean getUserVerification(String s) {
+        boolean b = false;
+        try {
+            PreparedStatement st = connection.prepareStatement("SELECT id, login, password, name FROM users");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String login = rs.getString("login");
+                if (login.equals(s))
+                    b = true;
+            }
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return b;
     }
 }

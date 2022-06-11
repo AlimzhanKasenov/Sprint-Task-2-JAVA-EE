@@ -42,8 +42,4 @@ import java.util.ArrayList;
         request.setAttribute("novosti", arr);
         request.getRequestDispatcher("/main.jsp").forward(request, response);
     }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 }

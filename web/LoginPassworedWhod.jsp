@@ -38,6 +38,9 @@
               <p></p>
               <button type="submit" class="btn btn-primary">Login</button>
             </form>
+            <form class="align-bottom w-75 l-5 mx-auto" action="registrationServlet" method="get">
+              <button type="submit" class="btn btn-warning">Registration</button>
+            </form>
           </div>
         </div>
       </div>

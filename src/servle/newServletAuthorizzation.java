@@ -20,10 +20,14 @@ public class newServletAuthorizzation extends HttpServlet {
         for (Users u : arr){
             if (u.getLogin().equals(login) && u.getPassword().equals(password)){
                 request.setAttribute("users", u);
-                request.getRequestDispatcher("/MenuAdmins.jsp").forward(request, response);
+                request.getRequestDispatcher("/getLanguagesServlet").forward(request, response);
+                break;
+            } else {
+                request.setAttribute("user", "true");
+                request.getRequestDispatcher("/LoginPassworedWhod.jsp").forward(request, response);
             }
         }
-        request.setAttribute("user", "true");
-        request.getRequestDispatcher("/LoginPassworedWhod.jsp").forward(request, response);
+
+
     }
 }

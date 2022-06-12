@@ -272,7 +272,8 @@ public class DBconnector {
     public static boolean getUserVerification(String s) {
         boolean b = false;
         try {
-            PreparedStatement st = connection.prepareStatement("SELECT id, login, password, name FROM users");
+            PreparedStatement st = connection.prepareStatement("" +
+                    "SELECT id, login, password, name FROM users");
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 String login = rs.getString("login");
@@ -285,4 +286,64 @@ public class DBconnector {
         }
         return b;
     }
+
+    public static boolean addLanguages(String name, String code) {
+        boolean b = false;
+        int row = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("" +
+                    "INSERT INTO languages (id, name, code) " +
+                    "values (null, ?, ?)");
+
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, code);
+            row = preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+            if (row > 0)
+                b = true;
+        System.out.println("return " + b);
+            return b;
+    }
+
+    /* public static boolean editLanguages(Long id) {
+        boolean b = false;
+        int row = 0;
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("" +
+                    "INSERT INTO languages (id, name, code) " +
+                    "values (null, ?, ?)");
+
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, code);
+            row = preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (row > 0)
+            b = true;
+        System.out.println("return " + b);
+        return b;
+    }
+     */
+
+        public static ArrayList<Languages> getOneLanguages(Long langId) {
+            ArrayList<Languages> arr = new ArrayList<>();
+            try {
+                PreparedStatement st = connection.prepareStatement("SELECT id, name, code FROM language");
+                ResultSet rs = st.executeQuery();
+                while (rs.next()) {
+                    Long id = rs.getLong("id");
+                    String name = rs.getString("name");
+                    String code = rs.getString("code");
+                    if (id == langId)
+                    arr.add(new Languages(id, name, code));
+                }
+                st.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return arr;
+        }
 }

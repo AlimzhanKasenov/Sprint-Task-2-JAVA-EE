@@ -301,49 +301,61 @@ public class DBconnector {
         } catch (Exception e) {
             e.printStackTrace();
         }
-            if (row > 0)
-                b = true;
-        System.out.println("return " + b);
-            return b;
+        if (row > 0)
+            b = true;
+        return b;
     }
 
-    /* public static boolean editLanguages(Long id) {
-        boolean b = false;
-        int row = 0;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement("" +
-                    "INSERT INTO languages (id, name, code) " +
-                    "values (null, ?, ?)");
+    public static void editLanguages(Languages language) {
 
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, code);
-            row = preparedStatement.executeUpdate();
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "UPDATE languages SET name = ?, code = ? " +
+                    "WHERE id = ?");
+
+            statement.setString(1, language.getName());
+            statement.setString(2, language.getCode());
+            statement.setLong(3, language.getId());
+
+            statement.executeUpdate();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (row > 0)
-            b = true;
-        System.out.println("return " + b);
-        return b;
     }
-     */
 
-        public static ArrayList<Languages> getOneLanguages(Long langId) {
-            ArrayList<Languages> arr = new ArrayList<>();
-            try {
-                PreparedStatement st = connection.prepareStatement("SELECT id, name, code FROM language");
-                ResultSet rs = st.executeQuery();
-                while (rs.next()) {
-                    Long id = rs.getLong("id");
-                    String name = rs.getString("name");
-                    String code = rs.getString("code");
-                    if (id == langId)
-                    arr.add(new Languages(id, name, code));
+    public static Languages getOneLanguages(Long lang_id) {
+        Languages languages = new Languages();
+        try {
+            PreparedStatement st = connection.prepareStatement("SELECT id, name, code FROM languages");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Long id = rs.getLong("id");
+                String name = rs.getString("name");
+                String code = rs.getString("code");
+                if (id == lang_id) {
+                    languages = new Languages(id, name, code);
                 }
-                st.close();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-            return arr;
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return languages;
+    }
+
+    public static void deleteNews(News news){
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "DELETE FROM t_news WHERE id = ?");
+
+            statement.setLong(1, news.getId());
+
+            statement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

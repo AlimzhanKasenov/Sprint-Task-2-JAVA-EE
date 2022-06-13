@@ -40,8 +40,9 @@
               <th scope="row"><%=languages.getId()%></th>
               <td><%=languages.getName()%></td>
               <td><%=languages.getCode()%></td>
-              <td>
-                  <button class="btn btn-info"><a href="AddLanguagesServlet?languages_id=<%=languages.getId()%>" methods="post">Edit</a></button>
+              <td >
+                  <button class="btn btn-info"><a href="EditLanguagesServlet?languages_id=<%=languages.getId()%>">
+                      Edit</a></button>
                   <button class="btn btn-danger">Delete</button>
               </td>
           </tr>

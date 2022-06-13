@@ -344,13 +344,13 @@ public class DBconnector {
         return languages;
     }
 
-    public static void deleteNews(News news){
+    public static void deleteLanguages(Long lan){
 
         try {
             PreparedStatement statement = connection.prepareStatement("" +
-                    "DELETE FROM t_news WHERE id = ?");
+                    "DELETE FROM languages WHERE id = ?");
 
-            statement.setLong(1, news.getId());
+            statement.setLong(1, lan);
 
             statement.executeUpdate();
 

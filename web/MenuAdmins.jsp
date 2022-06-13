@@ -43,7 +43,8 @@
               <td >
                   <button class="btn btn-info"><a href="EditLanguagesServlet?languages_id=<%=languages.getId()%>">
                       Edit</a></button>
-                  <button class="btn btn-danger">Delete</button>
+                  <button class="btn btn-danger"><a href="DeletLanguageServlet?languages_id=<%=languages.getId()%>">
+                      Delete</a></button>
               </td>
           </tr>
           <%

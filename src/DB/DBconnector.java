@@ -39,42 +39,6 @@ public class DBconnector {
         return languages;
     }
 
-    public static ArrayList<News> getNews() {
-        ArrayList<News> arr = new ArrayList<>();
-        try {
-            PreparedStatement st = connection.prepareStatement("" +
-                    "SELECT it.id, it.title, it.short_content, it.content, it.post_date, it.picture_url, " +
-                    "it.language_id, it.publication_id, pub.id, pub.name, pub.description, pub.rating, " +
-                    "lan.id, lan.name, lan.code " +
-                    "FROM news it " +
-                    "INNER JOIN languages lan ON it.language_id = lan.id " +
-                    "INNER JOIN publications pub ON it.publication_id = pub.id");
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Long id = rs.getLong("id");
-                String title = rs.getString("title");
-                String short_content = rs.getString("short_content");
-                String content = rs.getString("content");
-                Timestamp post_date = rs.getTimestamp("post_date");
-                String picture_url = rs.getString("picture_url");
-                Languages lan = new Languages(
-                        rs.getLong("id"),
-                        rs.getString("name"),
-                        rs.getString("code"));
-                Publications pub = new Publications(
-                        rs.getLong("id"),
-                        rs.getString("name"),
-                        rs.getString("description"),
-                        rs.getDouble("rating"));
-                arr.add(new News(id, title, short_content, content, post_date, picture_url, lan, pub));
-            }
-            st.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return arr;
-    }
-
     public static ArrayList<News> getNewsByLanguageId(Long langId) {
         ArrayList<News> arr = new ArrayList<>();
         try {
@@ -133,68 +97,6 @@ public class DBconnector {
         return publ;
     }
 
-    public static String getOnePublications(Long s) {
-        String publ = "0";
-        try {
-            PreparedStatement st = connection.prepareStatement("SELECT id, name, description, rating FROM publications");
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Long id = rs.getLong("id");
-                String name = rs.getString("name");
-
-                if (s == id) {
-                    publ = name;
-                }
-            }
-            st.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return publ;
-    }
-
-    public static ArrayList<News> getSortNow(Long lan) {
-        ArrayList<News> arr = new ArrayList<>();
-        try {
-            PreparedStatement st = connection.prepareStatement("" +
-                    "SELECT * FROM news " +
-                    "WHERE language_id = ? " +
-                    "ORDER BY post_date DESC");
-
-            st.setLong(1, lan);
-            ResultSet rs = st.executeQuery();
-
-            while (rs.next()) {
-
-                News n = new News();
-                n.setId(rs.getLong("id"));
-                n.setTitle(rs.getString("title"));
-                n.setShort_content(rs.getString("short_content"));
-                n.setContent(rs.getString("content"));
-                n.setPost_date(rs.getTimestamp("post_date"));
-                n.setPicture_url(rs.getString("picture_url"));
-
-                Languages langua = new Languages();
-                langua.setId(rs.getLong("language_id"));
-
-                Publications pub = new Publications();
-                pub.setId(rs.getLong("publication_id"));
-
-                n.setLanguage_id(langua);
-                n.setPublication_id(pub);
-
-
-                if (langua.getId() == lan) {
-                    arr.add(n);
-                }
-            }
-            st.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return arr;
-    }
-
     public static ArrayList<News> getOneNov(Long id_news) {
         ArrayList<News> arr = new ArrayList<>();
         try {
@@ -231,25 +133,6 @@ public class DBconnector {
             e.printStackTrace();
         }
         return arr;
-    }
-
-    public static ArrayList<Users> authorization() {
-        ArrayList<Users> user = new ArrayList<>();
-        try {
-            PreparedStatement st = connection.prepareStatement("SELECT id, login, password, name FROM users");
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Long id = rs.getLong("id");
-                String login = rs.getString("login");
-                String password = rs.getString("password");
-                String fullName = rs.getString("name");
-                user.add(new Users(id, login, password, fullName));
-            }
-            st.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return user;
     }
 
     public static boolean addUser(String login, String password, String name) {

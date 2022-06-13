@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -16,18 +17,14 @@ public class newServletAuthorizzation extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String password = request.getParameter("passwor");
-        ArrayList<Users> arr = DBconnector.authorization();
-        for (Users u : arr){
-            if (u.getLogin().equals(login) && u.getPassword().equals(password)){
-                request.setAttribute("users", u);
-                request.getRequestDispatcher("/getLanguagesServlet").forward(request, response);
-                break;
-            } else {
-                request.setAttribute("user", "true");
-                request.getRequestDispatcher("/LoginPassworedWhod.jsp").forward(request, response);
-            }
+        HttpSession session = request.getSession();
+        Users user = DBconnector.getOneUser(login, password);
+
+        if (user != null) {
+            request.getSession().setAttribute("online_user", user);
+            request.getRequestDispatcher("/getLanguagesServlet").forward(request, response);
+        } else {
+            request.getRequestDispatcher("/LoginPassworedWhod.jsp").forward(request, response);
         }
-
-
     }
 }

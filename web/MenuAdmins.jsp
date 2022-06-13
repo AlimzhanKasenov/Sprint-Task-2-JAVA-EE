@@ -1,6 +1,10 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.Languages" %>
+<%@ page import="model.Users" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%         Users users = (Users) request.getSession().getAttribute("online_user");
+                if (users != null) {
+                    %>
 <html>
 <head>
     <title>Админ</title>
@@ -56,3 +60,6 @@
 </div>
 </body>
 </html>
+<%
+}
+%>

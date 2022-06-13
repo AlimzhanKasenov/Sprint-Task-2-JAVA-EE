@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <b class="navbar-brand text-white">WORLD NEWS PORTAL</b>
         </button>
-            <form class="d-flex">
+            <form action="logoutServlet" method="post" class="d-flex">
                 <button class="btn btn-outline-warning align-self-center" type="submit">Sign out</button>
             </form>
         </div>

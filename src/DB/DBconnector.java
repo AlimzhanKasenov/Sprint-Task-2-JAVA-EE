@@ -358,4 +358,29 @@ public class DBconnector {
             e.printStackTrace();
         }
     }
+
+    public static Users getOneUser(String login, String password) {
+        Users user = new Users();
+        try {
+            PreparedStatement st = connection.prepareStatement("SELECT id, login, password, name FROM users");
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Long id = rs.getLong("id");
+                String loginUser = rs.getString("login");
+                String passwordUser = rs.getString("password");
+                String fullName = rs.getString("name");
+                if (login.equals(loginUser) & password.equals(passwordUser)) {
+                    user.setId(id);
+                    user.setLogin(loginUser);
+                    user.setPassword(passwordUser);
+                    user.setName(fullName);
+                    break;
+                }
+            }
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }

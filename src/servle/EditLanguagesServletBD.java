@@ -23,7 +23,7 @@ public class EditLanguagesServletBD extends HttpServlet {
         Languages lan = DBconnector.getOneLanguages(lon);
         Languages languagesAdd = new Languages(lan.getId(), name, code);
         languagesAdd.setName(name);
-        languagesAdd.setName(code);
+        languagesAdd.setCode(code);
         DBconnector.editLanguages(languagesAdd);
         request.getRequestDispatcher("/getLanguagesServlet").forward(request, response);
     }

@@ -318,7 +318,6 @@ public class DBconnector {
             statement.setLong(3, language.getId());
 
             statement.executeUpdate();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -362,8 +361,8 @@ public class DBconnector {
     public static Users getOneUser(String login, String password) {
         Users user = new Users();
         try {
-            PreparedStatement st = connection.prepareStatement("SELECT id, login, password, name FROM users");
-            ResultSet rs = st.executeQuery();
+            PreparedStatement statement = connection.prepareStatement("SELECT id, login, password, name FROM users");
+            ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Long id = rs.getLong("id");
                 String loginUser = rs.getString("login");
@@ -377,7 +376,7 @@ public class DBconnector {
                     break;
                 }
             }
-            st.close();
+            statement.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -17,12 +17,15 @@ public class newServletAuthorizzation extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String password = request.getParameter("passwor");
-        HttpSession session = request.getSession();
         Users user = DBconnector.getOneUser(login, password);
 
         if (user != null) {
-            request.getSession().setAttribute("online_user", user);
-            request.getRequestDispatcher("/getLanguagesServlet").forward(request, response);
+            if (login.equals(user.getLogin())) {
+                if (password.equals(user.getPassword())) {
+                    request.getSession().setAttribute("online_user", user);
+                    request.getRequestDispatcher("/getLanguagesServlet").forward(request, response);
+                }
+            }
         } else {
             request.getRequestDispatcher("/LoginPassworedWhod.jsp").forward(request, response);
         }
